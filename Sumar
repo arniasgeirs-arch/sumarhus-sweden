@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferðaplönun - Gistimöguleikar</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f5f7fa;
+}
+
+h1 {
+    color: #333;
+}
+
+form {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    background: #0078d4;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #005ea6;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+th {
+    background: #0078d4;
+    color: white;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+a {
+    color: #0078d4;
+}
+</style>
+</head>
+<body>
+
+<h1>🏡 Gistimöguleikar fyrir ferðina</h1>
+
+<form id="hotelForm">
+    <label>Gistimöguleiki</label>
+    <input type="text" id="name" required>
+
+    <label>Verð</label>
+    <input type="text" id="price">
+
+    <label>Hlekkur</label>
+    <input type="url" id="link">
+
+    <label>Fjöldi gesta</label>
+    <input type="number" id="people">
+
+    <label>Komment</label>
+    <textarea id="comment"></textarea>
+
+    <button type="submit">Bæta við</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Gistimöguleiki</th>
+            <th>Verð</th>
+            <th>Linkur</th>
+            <th>Fjöldi</th>
+            <th>Komment</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+</table>
+
+<script>
+document.getElementById("hotelForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+        <td>${document.getElementById("name").value}</td>
+        <td>${document.getElementById("price").value}</td>
+        <td>
+            <a href="${document.getElementById("link").value}" target="_blank">
+                Opna
+            </a>
+        </td>
+        <td>${document.getElementById("people").value}</td>
+        <td>${document.getElementById("comment").value}</td>
+    `;
+
+    document.getElementById("tableBody").appendChild(row);
+
+    document.getElementById("hotelForm").reset();
+});
+</script>
+
+</body>
+</html>
